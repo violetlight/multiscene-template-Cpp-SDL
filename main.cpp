@@ -17,7 +17,7 @@ bool init()
 {
   bool success = true;
 
-  //Initialize SDL
+  // Initialize SDL
   if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
   {
     printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
@@ -25,7 +25,7 @@ bool init()
   }
   else
   {
-    //Create window
+    // Create window
     gWindow = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
     if( gWindow == NULL )
     {
@@ -34,7 +34,7 @@ bool init()
     }
     else
     {
-      //Get window surface
+      // Get window surface
       gScreenSurface = SDL_GetWindowSurface( gWindow );
     }
   }
@@ -45,11 +45,11 @@ bool init()
 void close()
 {
 
-  //Destroy window
+  // Destroy window
   SDL_DestroyWindow( gWindow );
   gWindow = NULL;
 
-  //Quit SDL subsystems
+  // Quit SDL subsystems
   SDL_Quit();
 }
 
@@ -59,9 +59,25 @@ int main ( int argc, char* args[] )
   if( !init() )
   {
     printf( "Failed to initialize!\n" );
-  }
+  } else
+  {
+    bool quit = false;
+    // Event handler
+    SDL_Event e;
 
-  printf( "ESS DEE ELL\n" );
+    while( !quit )
+    {
+      while( SDL_PollEvent( &e ) != 0)
+      {
+        // Quit event
+        if( e.type == SDL_QUIT )
+        {
+          quit = true;
+        }
+      }
+    }
+
+  }
 
 
   // screen, screen rect, etc..
