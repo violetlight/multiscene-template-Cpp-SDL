@@ -74,13 +74,14 @@ int main ( int argc, char* args[] )
         {
           quit = true;
         }
-      }
-    }
+      } // events
+
+      //Update the surface
+      SDL_UpdateWindowSurface( gWindow );
+
+    } // main loop
 
   }
-
-
-  // screen, screen rect, etc..
 
   // control object
   // std::map (dict) of states
