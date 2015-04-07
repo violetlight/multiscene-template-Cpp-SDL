@@ -63,14 +63,15 @@ int main ( int argc, char* args[] )
 	}
 
   printf( "ESS DEE ELL\n" );
-  close();
 
-  // pg.init(), screen, screen rect, etc..
+
+  // screen, screen rect, etc..
 
   // control object
   // std::map (dict) of states
   // control object init, pass in states dict
   // control object main loop()
 
+  close();
   return 0;
 }
