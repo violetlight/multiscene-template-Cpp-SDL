@@ -56,11 +56,10 @@ void close()
 int main ( int argc, char* args[] )
 {
 
-
   if( !init() )
-	{
-		printf( "Failed to initialize!\n" );
-	}
+  {
+    printf( "Failed to initialize!\n" );
+  }
 
   printf( "ESS DEE ELL\n" );
 
