@@ -13,12 +13,15 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 const char gTitle[] = "Multiscene Template";
 
+
+
+
 bool init()
 {
   bool success = true;
 
   // Initialize SDL
-  if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+  if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 )
   {
     printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
     success = false;
@@ -42,6 +45,9 @@ bool init()
   return success;
 }
 
+
+
+
 void close()
 {
 
@@ -52,6 +58,9 @@ void close()
   // Quit SDL subsystems
   SDL_Quit();
 }
+
+
+
 
 int main ( int argc, char* args[] )
 {
