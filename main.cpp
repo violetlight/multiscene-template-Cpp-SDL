@@ -4,7 +4,7 @@
 #include <string>
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
+const int SCREEN_WIDTH = 640; // put in constants file
 const int SCREEN_HEIGHT = 480;
 
 bool init();
@@ -16,8 +16,6 @@ SDL_Surface* loadSurface( std::string path );
 SDL_Window* gWindow = nullptr;
 SDL_Surface* gScreenSurface = nullptr;
 const char gTitle[] = "Multiscene Template";
-
-
 
 
 bool init()
@@ -53,8 +51,6 @@ bool init()
 }
 
 
-
-
 void close()
 {
 
@@ -65,8 +61,6 @@ void close()
   // Quit SDL subsystems
   SDL_Quit();
 }
-
-
 
 
 SDL_Surface* loadSurface( std::string path )
@@ -82,9 +76,9 @@ SDL_Surface* loadSurface( std::string path )
 }
 
 
-
 int main ( int argc, char* args[] )
 {
+  // prepare() here
 
   if( !init() )
   {
