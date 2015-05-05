@@ -4,7 +4,7 @@
 
 SDL_Window* Prepare::init() {
   const char CAPTION[] = "Multiscene Template";
-  SDL_Window* Window = NULL; // why doesn't nullptr work?
+  SDL_Window* Window = nullptr;
   bool success = true; //currently unused
 
   // Initialize SDL
@@ -20,7 +20,7 @@ SDL_Window* Prepare::init() {
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                 Constants::SCREEN_W, Constants::SCREEN_H,
                                 SDL_WINDOW_SHOWN );
-    if( Window == NULL )
+    if( Window == nullptr )
     {
       printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
       success = false;
