@@ -2,8 +2,13 @@
 #define PREPARE_H
 #include <sdl2/SDL.h>
 
+namespace Screen{
+  SDL_Window* window;
+  SDL_Renderer* renderer;
+}
+
 namespace Prepare {
-  SDL_Window* init();
+  bool init();
 }
 
 #endif

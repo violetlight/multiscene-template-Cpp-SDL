@@ -25,8 +25,10 @@ int main ( int argc, char* args[] )
 {
   // prepare() here
 
-  SDL_Window* Window = Prepare::init();
-  SDL_Renderer* Renderer = SDL_CreateRenderer(Window, -1, 0);
+  Screen::window = nullptr;
+  Screen::renderer = nullptr;
+  Prepare::init();
+
 
 
   bool quit = false;
@@ -43,11 +45,10 @@ int main ( int argc, char* args[] )
       }
     } // events
 
-
-    SDL_SetRenderDrawColor(Renderer, 100, 0, 0, 255);
-    SDL_RenderClear(Renderer);
-    SDL_RenderPresent(Renderer);
     //Update the surface
+    SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
+    SDL_RenderClear(Screen::renderer);
+    SDL_RenderPresent(Screen::renderer);
     //SDL_UpdateWindowSurface( Window );
 
   } // main loop
@@ -58,6 +59,6 @@ int main ( int argc, char* args[] )
   // control object init, pass in states dict
   // control object main loop()
 
-  close(Window);
+  close(Screen::window);
   return 0;
 }
