@@ -2,8 +2,8 @@
 #include <sdl2/SDL_image.h>
 #include <stdio.h>
 #include <string>
-#include "data/tools.h"
 #include "data/prepare.h"
+#include "data/tools.h"
 
 
 // SDL_Surface* gScreenSurface = nullptr;
@@ -23,13 +23,8 @@ void close(SDL_Window* Window)
 
 int main ( int argc, char* args[] )
 {
-  // prepare() here
 
-  Screen::window = nullptr;
-  Screen::renderer = nullptr;
   Prepare::init();
-
-
 
   bool quit = false;
   SDL_Event e;
@@ -49,7 +44,6 @@ int main ( int argc, char* args[] )
     SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
     SDL_RenderClear(Screen::renderer);
     SDL_RenderPresent(Screen::renderer);
-    //SDL_UpdateWindowSurface( Window );
 
   } // main loop
 
