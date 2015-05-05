@@ -3,8 +3,8 @@
 #include <sdl2/SDL.h>
 
 namespace Screen{
-  SDL_Window* window;
-  SDL_Renderer* renderer;
+  extern SDL_Window* window;
+  extern SDL_Renderer* renderer;
 }
 
 namespace Prepare {

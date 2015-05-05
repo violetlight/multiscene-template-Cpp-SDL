@@ -1,6 +1,11 @@
 #include "prepare.h"
 #include "constants.h"
 
+
+SDL_Window* Screen::window = nullptr;
+SDL_Renderer* Screen::renderer = nullptr;
+
+
 bool Prepare::init() {
   const char CAPTION[] = "Multiscene Template";
   bool success = true; //currently unused
