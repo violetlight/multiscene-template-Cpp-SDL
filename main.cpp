@@ -2,61 +2,21 @@
 #include <sdl2/SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include "data/prepare.h"
 
-//Screen dimension constants
-const int SCREEN_WIDTH = 640; // put in constants file
-const int SCREEN_HEIGHT = 480;
-
-bool init();
-void close();
+void close(SDL_Window* Window);
 
 //Loads individual image
 SDL_Surface* loadSurface( std::string path );
 
-SDL_Window* gWindow = nullptr;
 SDL_Surface* gScreenSurface = nullptr;
-const char gTitle[] = "Multiscene Template";
 
-
-bool init()
-{
-  bool success = true;
-
-  // Initialize SDL
-  if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 )
-  {
-    printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
-    success = false;
-  }
-  else
-  {
-    // Create window
-    gWindow = SDL_CreateWindow( gTitle,
-                                SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                SCREEN_WIDTH, SCREEN_HEIGHT,
-                                SDL_WINDOW_SHOWN );
-    if( gWindow == NULL )
-    {
-      printf( "Window could not be created! SDL Error: %s\n", SDL_GetError() );
-      success = false;
-    }
-    else
-    {
-      // Get window surface
-      gScreenSurface = SDL_GetWindowSurface( gWindow );
-    }
-  }
-
-  return success;
-}
-
-
-void close()
+void close(SDL_Window* Window)
 {
 
   // Destroy window
-  SDL_DestroyWindow( gWindow );
-  gWindow = NULL;
+  SDL_DestroyWindow( Window );
+  Window = nullptr;
 
   // Quit SDL subsystems
   SDL_Quit();
@@ -80,38 +40,34 @@ int main ( int argc, char* args[] )
 {
   // prepare() here
 
-  if( !init() )
-  {
-    printf( "Failed to initialize!\n" );
-  } else
-  {
-    bool quit = false;
-    // Event handler
-    SDL_Event e;
+  SDL_Window* Window = Prepare::init();
 
-    while( !quit )
+
+  bool quit = false;
+  SDL_Event e;
+
+  while( !quit )
+  {
+    while( SDL_PollEvent( &e ) != 0)
     {
-      while( SDL_PollEvent( &e ) != 0)
+      // Quit event
+      if( e.type == SDL_QUIT )
       {
-        // Quit event
-        if( e.type == SDL_QUIT )
-        {
-          quit = true;
-        }
-      } // events
+        quit = true;
+      }
+    } // events
 
-      //Update the surface
-      SDL_UpdateWindowSurface( gWindow );
+    //Update the surface
+    SDL_UpdateWindowSurface( Window );
 
-    } // main loop
+  } // main loop
 
-  }
 
   // instantiate control object
   // std::map (dict) of states
   // control object init, pass in states dict
   // control object main loop()
 
-  close();
+  close(Window);
   return 0;
 }
