@@ -2,14 +2,11 @@
 #include <sdl2/SDL_image.h>
 #include <stdio.h>
 #include <string>
+#include "data/tools.h"
 #include "data/prepare.h"
 
-void close(SDL_Window* Window);
 
-//Loads individual image
-SDL_Surface* loadSurface( std::string path );
-
-SDL_Surface* gScreenSurface = nullptr;
+// SDL_Surface* gScreenSurface = nullptr;
 
 void close(SDL_Window* Window)
 {
@@ -23,24 +20,13 @@ void close(SDL_Window* Window)
 }
 
 
-SDL_Surface* loadSurface( std::string path )
-{
-  //Load image at specified path
-  SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
-  if( loadedSurface == nullptr )
-  {
-    printf( "Unable to load image %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-  }
-
-  return loadedSurface;
-}
-
 
 int main ( int argc, char* args[] )
 {
   // prepare() here
 
   SDL_Window* Window = Prepare::init();
+  SDL_Renderer* Renderer = SDL_CreateRenderer(Window, -1, 0);
 
 
   bool quit = false;
@@ -57,8 +43,12 @@ int main ( int argc, char* args[] )
       }
     } // events
 
+
+    SDL_SetRenderDrawColor(Renderer, 100, 0, 0, 255);
+    SDL_RenderClear(Renderer);
+    SDL_RenderPresent(Renderer);
     //Update the surface
-    SDL_UpdateWindowSurface( Window );
+    //SDL_UpdateWindowSurface( Window );
 
   } // main loop
 
