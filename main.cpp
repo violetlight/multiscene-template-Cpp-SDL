@@ -1,4 +1,5 @@
 #include <sdl2/SDL.h>
+#include <sdl2/SDL_image.h>
 #include <stdio.h>
 #include <string>
 
@@ -12,8 +13,8 @@ void close();
 //Loads individual image
 SDL_Surface* loadSurface( std::string path );
 
-SDL_Window* gWindow = NULL;
-SDL_Surface* gScreenSurface = NULL;
+SDL_Window* gWindow = nullptr;
+SDL_Surface* gScreenSurface = nullptr;
 const char gTitle[] = "Multiscene Template";
 
 
@@ -112,7 +113,7 @@ int main ( int argc, char* args[] )
 
   }
 
-  // control object
+  // instantiate control object
   // std::map (dict) of states
   // control object init, pass in states dict
   // control object main loop()
