@@ -6,8 +6,6 @@
 #include "data/tools.h"
 
 
-// SDL_Surface* gScreenSurface = nullptr;
-
 void close(SDL_Window* Window)
 {
 
