@@ -35,59 +35,6 @@ SDL_Texture* loadTexture(std::string path)
 }
 
 
-// bool loadGraphics(std::map<std::string, SDL_Texture*> gfxMap)
-// {
-//     // split filename . ext
-//     // iterate over them, loading each one as a texture and storing it in the map
-//     std::string gfxPath = "resources/graphics/";
-//
-//     std::map<std::string, SDL_Texture*> gfx;
-//     tinydir_dir gfxDir;
-//     tinydir_open(&gfxDir, gfxPath.c_str());
-//
-//     while (gfxDir.has_next)
-//     {
-//       tinydir_file file;
-//       tinydir_readfile(&gfxDir, &file);
-//
-//       std::cout << file.name;
-//       if (file.is_dir)
-//       {
-//         // call function recursively with new dir
-//         std::cout << "/";
-//
-//         tinydir_dir gfxSubDir;
-//         std::string gfxSubPath = gfxPath + file.name + "/";
-//
-//         // function begins here at open
-//         tinydir_open(&gfxSubDir, gfxSubPath.c_str());
-//
-//
-//         tinydir_next(&gfxDir);
-//         continue;
-//       }
-//       std::cout << std::endl;
-//
-//       std::string individualPath = gfxPath + file.name;
-//       //std::cout << individualPath << std::endl;
-//
-//       SDL_Texture* img = nullptr;
-//       img = loadTexture(individualPath);
-//       if (img == NULL)
-//       {
-//         std::cout << "Failed to load texture!" << std::endl;
-//       }
-//
-//
-//       tinydir_next(&gfxDir);
-//     }
-//
-//     tinydir_close(&gfxDir);
-//
-//     return true; // change this later
-// }
-
-
 bool mapResourceNode(std::string path, std::vector<std::string>& paths) {
 
   tinydir_dir dir;
