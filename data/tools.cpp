@@ -70,7 +70,6 @@ bool loadGraphics(std::map<std::string, SDL_Texture*>& map) {
   std::string key = "a";
 
   for (auto &path: paths) {
-    std::cout << path << std::endl;
     SDL_Texture* img = nullptr;
     img = loadTexture(path);
     if (img == NULL)
@@ -80,9 +79,8 @@ bool loadGraphics(std::map<std::string, SDL_Texture*>& map) {
     {
       map[key] = img;
     }
-    key = key + "a";
+    key = key + "a"; // this is garbage
   }
 
-  std::cout << map.size() << std::endl;
   return true;
 }

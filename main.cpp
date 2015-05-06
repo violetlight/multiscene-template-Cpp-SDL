@@ -27,7 +27,6 @@ int main (int argc, char* args[])
 
   std::map<std::string, SDL_Texture*> gfx;
   loadGraphics(gfx);
-  std::cout << gfx.size() << std::endl;
 
   bool quit = false;
   SDL_Event e;
@@ -46,7 +45,7 @@ int main (int argc, char* args[])
     //Update the surface
     SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
     SDL_RenderClear(Screen::renderer);
-    SDL_RenderCopy(Screen::renderer, loadTexture("resources/graphics/splash1.png"), NULL, NULL );
+    SDL_RenderCopy(Screen::renderer, gfx["a"], NULL, NULL );
     SDL_RenderPresent(Screen::renderer);
 
   } // main loop
