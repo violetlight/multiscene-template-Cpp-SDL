@@ -4,11 +4,12 @@
 #include <sdl2/SDL.h>
 #include <sdl2/SDL_image.h>
 #include <string>
+#include <map>
 
 //Loads individual image
 SDL_Texture* loadTexture(std::string path);
 
 //work in progress
-std::map<std::string, SDL_Texture*> loadGraphics()
+bool loadGraphics();
 
 #endif

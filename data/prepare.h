@@ -2,7 +2,7 @@
 #define PREPARE_H
 #include <sdl2/SDL.h>
 
-namespace Screen{
+namespace Screen {
   extern SDL_Window* window;
   extern SDL_Renderer* renderer;
 }

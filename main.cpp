@@ -4,7 +4,7 @@
 #include <string>
 #include "data/prepare.h"
 #include "data/tools.h"
-
+// #include "data/constants.h" //i think this will break it
 
 void close(SDL_Window* Window)
 {
@@ -24,6 +24,11 @@ int main (int argc, char* args[])
 
   Prepare::init();
 
+  // std::map<std::string, SDL_Texture*> gfxMap;
+  // loadGraphics(gfxMap);
+
+  loadGraphics();
+
   bool quit = false;
   SDL_Event e;
 
@@ -41,7 +46,7 @@ int main (int argc, char* args[])
     //Update the surface
     SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
     SDL_RenderClear(Screen::renderer);
-    SDL_RenderCopy(Screen::renderer, loadGraphics(), NULL, NULL );
+    // SDL_RenderCopy(Screen::renderer, loadGraphics(), NULL, NULL );
     SDL_RenderPresent(Screen::renderer);
 
   } // main loop
