@@ -45,7 +45,7 @@ int main (int argc, char* args[])
     //Update the surface
     SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
     SDL_RenderClear(Screen::renderer);
-    SDL_RenderCopy(Screen::renderer, gfx["a"], NULL, NULL );
+    SDL_RenderCopy(Screen::renderer, gfx["splash1.png"], NULL, NULL );
     SDL_RenderPresent(Screen::renderer);
 
   } // main loop

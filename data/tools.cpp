@@ -35,7 +35,7 @@ SDL_Texture* loadTexture(std::string path)
 }
 
 
-bool mapResourceNode(std::string path, std::vector<std::string>& paths) {
+bool mapResourceNode(std::string path, std::map<std::string, std::string>& paths) {
 
   tinydir_dir dir;
   tinydir_open(&dir, path.c_str());
@@ -52,7 +52,7 @@ bool mapResourceNode(std::string path, std::vector<std::string>& paths) {
         mapResourceNode(path+file.name+"/", paths);
       } else
       {
-        paths.push_back(path+file.name);
+        paths[file.name] = path+file.name;
       }
     }
 
@@ -64,22 +64,19 @@ bool mapResourceNode(std::string path, std::vector<std::string>& paths) {
 
 bool loadGraphics(std::map<std::string, SDL_Texture*>& map) {
 
-  std::vector<std::string> paths;
+  std::map<std::string, std::string> paths;
   mapResourceNode("resources/graphics/", paths);
-
-  std::string key = "a";
 
   for (auto &path: paths) {
     SDL_Texture* img = nullptr;
-    img = loadTexture(path);
+    img = loadTexture(path.second);
     if (img == NULL)
     {
-      std::cout << "Failed to load texture: " << path << std::endl;
+      std::cout << "Failed to load texture: " << path.second << std::endl;
     } else
     {
-      map[key] = img;
+      map[path.first] = img;
     }
-    key = key + "a"; // this is garbage
   }
 
   return true;
