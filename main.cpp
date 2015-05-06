@@ -26,8 +26,8 @@ int main (int argc, char* args[])
 
   // std::map<std::string, SDL_Texture*> gfxMap;
   // loadGraphics(gfxMap);
-
-  loadGraphics();
+  std::map<std::string, SDL_Texture*> gfx;
+  loadGraphics(gfx);
 
   bool quit = false;
   SDL_Event e;

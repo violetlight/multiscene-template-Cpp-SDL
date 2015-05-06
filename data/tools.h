@@ -10,6 +10,6 @@
 SDL_Texture* loadTexture(std::string path);
 
 //work in progress
-bool loadGraphics();
+bool loadGraphics(std::map<std::string, SDL_Texture*> map);
 
 #endif

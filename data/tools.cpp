@@ -88,9 +88,8 @@ SDL_Texture* loadTexture(std::string path)
 // }
 
 
-std::vector<std::string> mapResourceNode(std::string path) {
+bool mapResourceNode(std::string path, std::vector<std::string>& paths) {
 
-  std::vector<std::string> paths;
   tinydir_dir dir;
   tinydir_open(&dir, path.c_str());
 
@@ -98,30 +97,40 @@ std::vector<std::string> mapResourceNode(std::string path) {
   {
     tinydir_file file;
     tinydir_readfile(&dir, &file);
+    std::cout << file.name << std::endl;
 
-    if (file.is_dir &&
-        strlen(file.name) > 2)
+    if (strlen(file.name) > 2) // directories need to be > 2 chars long
     {
-      mapResourceNode(path+file.name+"/");
-    } else
-    {
-      std::cout << path+file.name << std::endl;
-      paths.push_back(path);
+      if (file.is_dir)
+      {
+        mapResourceNode(path+file.name+"/", paths);
+      } else
+      {
+        paths.push_back(path+file.name);
+      }
     }
+
     tinydir_next(&dir);
   }
 
-  return paths;
-}
-
-bool loadGraphics() {
-  std::vector<std::string> paths = mapResourceNode("resources/graphics/");
-  for (auto &path: paths) {
-    std::cout << path;
-  }
   return true;
 }
 
-// iterate over paths vector
-// print out element
-// call loadGraphics from main()
+bool loadGraphics(std::map<std::string, SDL_Texture*> map) {
+  std::vector<std::string> paths;
+  mapResourceNode("resources/graphics/", paths);
+
+  std::cout << "\n\n---------------\n\n" << std::endl; //debug
+
+
+  for (auto &path: paths) {
+    std::cout << path << std::endl;  //debug
+    SDL_Texture* img = nullptr;
+    img = loadTexture(path);
+    if (img == NULL)
+    {
+      std::cout << "Failed to load texture: " << path << std::endl;
+    }
+  }
+  return true;
+}
