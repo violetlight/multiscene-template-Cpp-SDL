@@ -12,7 +12,7 @@ void close(SDL_Window* Window)
 {
 
   // Destroy window
-  SDL_DestroyWindow( Window );
+  SDL_DestroyWindow(Window);
   Window = nullptr;
 
   // Quit SDL subsystems
@@ -21,7 +21,7 @@ void close(SDL_Window* Window)
 
 
 
-int main ( int argc, char* args[] )
+int main (int argc, char* args[])
 {
 
   Prepare::init();
@@ -29,12 +29,12 @@ int main ( int argc, char* args[] )
   bool quit = false;
   SDL_Event e;
 
-  while( !quit )
+  while(!quit)
   {
-    while( SDL_PollEvent( &e ) != 0)
+    while(SDL_PollEvent(&e) != 0)
     {
       // Quit event
-      if( e.type == SDL_QUIT )
+      if(e.type == SDL_QUIT)
       {
         quit = true;
       }
@@ -43,6 +43,7 @@ int main ( int argc, char* args[] )
     //Update the surface
     SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
     SDL_RenderClear(Screen::renderer);
+    SDL_RenderCopy(Screen::renderer, loadGraphics(), NULL, NULL );
     SDL_RenderPresent(Screen::renderer);
 
   } // main loop

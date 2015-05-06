@@ -6,6 +6,9 @@
 #include <string>
 
 //Loads individual image
-SDL_Texture* loadTexture( std::string path );
+SDL_Texture* loadTexture(std::string path);
+
+//work in progress
+SDL_Texture* loadGraphics();
 
 #endif
