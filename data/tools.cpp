@@ -116,8 +116,8 @@ std::vector<std::string> mapResourceNode(std::string path) {
 
 bool loadGraphics() {
   std::vector<std::string> paths = mapResourceNode("resources/graphics/");
-  for(std::vector<std::string>::iterator it = paths.begin(); it != paths.end(); ++it) {
-    std::cout << *it;
+  for (auto &path: paths) {
+    std::cout << path;
   }
   return true;
 }
