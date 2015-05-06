@@ -1,5 +1,6 @@
 #include "tools.h"
 #include "prepare.h"
+#include <map>
 
 SDL_Texture* loadTexture(std::string path)
 {
@@ -28,12 +29,29 @@ SDL_Texture* loadTexture(std::string path)
     return newTexture;
 }
 
-SDL_Texture* loadGraphics()
+// SDL_Texture* loadGraphics()
+// {
+//     SDL_Texture* gfx = nullptr;
+//     //Load PNG texture
+//     gfx = loadTexture("resources/graphics/splash2.png");
+//     if(gfx == NULL)
+//     {
+//         printf("Failed to load texture image!\n");
+//     }
+//
+//     return gfx;
+// }
+
+std::map<std::string, SDL_Texture*> loadGraphics()
 {
+    std::map<std::string, SDL_Texture*> gfx;
+    // get all files in resources/graphics/
+    // split filename . ext
+    // iterate over them, loading each one as a texture and storing it in the map
+
     SDL_Texture* gfx = nullptr;
     //Load PNG texture
     gfx = loadTexture("resources/graphics/splash2.png");
-    // gfx = loadTexture("splash1ss.png");
     if(gfx == NULL)
     {
         printf("Failed to load texture image!\n");
