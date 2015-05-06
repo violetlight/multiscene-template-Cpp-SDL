@@ -130,6 +130,9 @@ bool loadGraphics(std::map<std::string, SDL_Texture*> map) {
     if (img == NULL)
     {
       std::cout << "Failed to load texture: " << path << std::endl;
+    } else
+    {
+      map[path] = img;
     }
   }
   return true;
