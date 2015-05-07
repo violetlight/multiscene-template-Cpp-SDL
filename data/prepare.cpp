@@ -1,6 +1,6 @@
 #include "prepare.h"
 #include "constants.h"
-
+#include "SDL/SDL_mixer.h"
 
 SDL_Window* Screen::window = nullptr;
 SDL_Renderer* Screen::renderer = nullptr;
@@ -34,8 +34,13 @@ bool Prepare::init() {
       //gScreenSurface = SDL_GetWindowSurface( Window );
 
       Screen::renderer = SDL_CreateRenderer(Screen::window, -1, 0); // wrap this in error catching too
-      return success;
     }
   }
+
+  if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+  {
+      success = false;
+  }
+  return success;
 
 } // need to handle error..

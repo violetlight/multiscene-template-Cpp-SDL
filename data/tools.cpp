@@ -1,5 +1,6 @@
 #include "tools.h"
 #include "prepare.h"
+#include <sdl2/SDL_mixer.h>
 #include <map>
 #include <vector>
 #include "../vendor/tinydir.h"

@@ -1,3 +1,4 @@
 *.out
 ignore*
 *dSYM
+*.DS_Store*
