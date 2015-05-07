@@ -1,6 +1,5 @@
 #include "tools.h"
 #include "prepare.h"
-#include <sdl2/SDL_mixer.h>
 #include <map>
 #include <vector>
 #include "../vendor/tinydir.h"
@@ -77,6 +76,27 @@ bool loadGraphics(std::map<std::string, SDL_Texture*>& map) {
     } else
     {
       map[path.first] = img;
+    }
+  }
+
+  return true;
+}
+
+
+bool loadMusic(std::map<std::string, Mix_Music*>& map) {
+
+  std::map<std::string, std::string> paths;
+  mapResourceNode("resources/music/", paths);
+
+  for (auto &path: paths) {
+    Mix_Music* file = nullptr;
+    file = Mix_LoadMUS(path.second.c_str());
+    if (file == NULL)
+    {
+      std::cout << "Failed to load music: " << path.second << std::endl;
+    } else
+    {
+      map[path.first] = file;
     }
   }
 

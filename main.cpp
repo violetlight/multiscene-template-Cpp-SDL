@@ -8,14 +8,33 @@
 // #include "data/constants.h" //i think this will break it
 #include <iostream>
 
-void close(SDL_Window* Window)
+void close(std::map<std::string, SDL_Texture*> gfx,
+           std::map<std::string, Mix_Music*> music)
 {
 
+  // Destroy gfx
+  for (auto &img: gfx)
+  {
+    SDL_DestroyTexture(img.second);
+    img.second = nullptr;
+  }
+
+  // Destroy music
+  for (auto &track: music)
+  {
+    Mix_FreeMusic(track.second);
+    track.second = nullptr;
+  }
+
   // Destroy window
-  SDL_DestroyWindow(Window);
-  Window = nullptr;
+  SDL_DestroyRenderer(Screen::renderer);
+  SDL_DestroyWindow(Screen::window);
+  Screen::window = nullptr;
+  Screen::renderer = nullptr;
 
   // Quit SDL subsystems
+  Mix_Quit();
+  IMG_Quit();
   SDL_Quit();
 }
 
@@ -26,8 +45,8 @@ int main (int argc, char* args[])
 
   Prepare::init();
 
-  Mix_Music *music = nullptr;
-  music = Mix_LoadMUS("resources/music/koorong.wav");
+  std::map<std::string, Mix_Music*> music;
+  loadMusic(music);
 
   std::map<std::string, SDL_Texture*> gfx;
   loadGraphics(gfx);
@@ -39,13 +58,15 @@ int main (int argc, char* args[])
   {
     while(SDL_PollEvent(&e) != 0)
     {
+
+      // Key press
       if (e.type == SDL_KEYDOWN)
       {
         if (e.key.keysym.sym == SDLK_9)
         {    // no music playing
           if (Mix_PlayingMusic() == 0)
           {    // then play it
-            if (Mix_PlayMusic(music, -1) == -1)
+            if (Mix_PlayMusic(music["koorong.wav"], -1) == -1)
             {  // error
               return 1;
             } // music is playing
@@ -61,12 +82,13 @@ int main (int argc, char* args[])
           }
         }
       }
+
       // Quit event
       if(e.type == SDL_QUIT)
       {
         quit = true;
       }
-    } // events
+    }
 
     //Update the surface
     SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
@@ -82,6 +104,6 @@ int main (int argc, char* args[])
   // control object init, pass in states dict
   // control object main loop()
 
-  close(Screen::window);
+  close(gfx, music);
   return 0;
 }
