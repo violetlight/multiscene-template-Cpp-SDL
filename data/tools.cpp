@@ -1,8 +1,8 @@
 #include "tools.h"
 #include "prepare.h"
-#include <map>
 #include <vector>
 #include "../vendor/tinydir.h"
+#include "sprite.h"
 
 //debug
 #include <iostream>
@@ -98,6 +98,26 @@ bool Tools::loadMusic(std::map<std::string, Mix_Music*>& map) {
     } else
     {
       map[path.first] = file;
+    }
+  }
+
+  return true;
+}
+
+bool Tools::loadFonts(std::map<std::string, TTF_Font*>& map) {
+
+  std::map<std::string, std::string> paths;
+  mapResourceNode("resources/fonts/", paths);
+
+  for (auto &path: paths) {
+    TTF_Font* font = nullptr;
+    font = TTF_OpenFont(path.second.c_str(), 28);
+    if (font == NULL)
+    {
+      std::cout << "Failed to load font: " << path.second << std::endl;
+    } else
+    {
+      map[path.first] = font;
     }
   }
 

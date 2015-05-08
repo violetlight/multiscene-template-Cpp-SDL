@@ -1,6 +1,7 @@
 #include "prepare.h"
 #include "constants.h"
 #include "SDL/SDL_mixer.h"
+#include "SDL/SDL_ttf.h"
 
 SDL_Window* Screen::window = nullptr;
 SDL_Renderer* Screen::renderer = nullptr;
@@ -15,9 +16,15 @@ bool Prepare::init() {
   {
     printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
     success = false;
+    //Initialize SDL_ttf
   }
   else
   {
+    if( TTF_Init() == -1 )
+    {
+       printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+       success = false;
+    }
     // Create window
     Screen::window = SDL_CreateWindow(CAPTION,
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,

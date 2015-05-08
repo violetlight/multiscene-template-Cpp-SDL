@@ -1,11 +1,13 @@
 #include <sdl2/SDL.h>
 #include <sdl2/SDL_image.h>
 #include <sdl2/SDL_mixer.h>
+#include <sdl2/SDL_ttf.h>
 #include <stdio.h>
 #include <string>
 #include "data/prepare.h"
 #include "data/tools.h"
-//#include "data/constants.h" //i think this will break it
+#include "data/constants.h"
+#include "data/sprite.h"
 #include <iostream>
 
 void close(std::map<std::string, SDL_Texture*> gfx,
@@ -52,10 +54,21 @@ int main (int argc, char* args[])
   std::map<std::string, SDL_Texture*> gfx;
   Tools::loadGraphics(gfx);
 
+  std::map<std::string, TTF_Font*> fonts;
+  Tools::loadFonts(fonts);
+
+
   Tools::Sprite testGuy;
   if( !testGuy.setImage( gfx["foo.png"] ) ) //shim
   {
     printf( "Failed to load Foo' texture image!\n" );
+  }
+
+  Tools::Sprite testText;
+  SDL_Color textColor = {0xF0,0x0F,0xA0};
+  if (!testText.setImageFromText("helloooooooooo world", textColor, fonts["Fixedsys500c.ttf"]))
+  {
+    printf("Failed to render text!\n");
   }
   // --------------------------------------------------------------
 
@@ -105,6 +118,8 @@ int main (int argc, char* args[])
     // Render splash image
     SDL_RenderCopy(Screen::renderer, gfx["splash2.png"], NULL, NULL );
     testGuy.render(0, 0);
+    testText.render( ( Constants::SCREEN_W - testText.getWidth() ) / 2, ( Constants::SCREEN_H - testText.getHeight() ) / 2 );
+
 
     // Update screen
     SDL_RenderPresent(Screen::renderer);
