@@ -8,9 +8,9 @@
 #include <map>
 
 
-//Loads individual image
-
-bool loadGraphics(std::map<std::string, SDL_Texture*>& map);
-bool loadMusic(std::map<std::string, Mix_Music*>& map);
+namespace Tools {
+  bool loadGraphics(std::map<std::string, SDL_Texture*>& map);
+  bool loadMusic(std::map<std::string, Mix_Music*>& map);
+}
 
 #endif

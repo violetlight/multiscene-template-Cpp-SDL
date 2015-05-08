@@ -62,7 +62,7 @@ bool mapResourceNode(std::string path, std::map<std::string, std::string>& paths
   return true;
 }
 
-bool loadGraphics(std::map<std::string, SDL_Texture*>& map) {
+bool Tools::loadGraphics(std::map<std::string, SDL_Texture*>& map) {
 
   std::map<std::string, std::string> paths;
   mapResourceNode("resources/graphics/", paths);
@@ -83,7 +83,7 @@ bool loadGraphics(std::map<std::string, SDL_Texture*>& map) {
 }
 
 
-bool loadMusic(std::map<std::string, Mix_Music*>& map) {
+bool Tools::loadMusic(std::map<std::string, Mix_Music*>& map) {
 
   std::map<std::string, std::string> paths;
   mapResourceNode("resources/music/", paths);
