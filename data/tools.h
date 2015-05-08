@@ -7,8 +7,8 @@
 #include <string>
 #include <map>
 
+
 //Loads individual image
-SDL_Texture* loadTexture(std::string path);
 
 bool loadGraphics(std::map<std::string, SDL_Texture*>& map);
 bool loadMusic(std::map<std::string, Mix_Music*>& map);
