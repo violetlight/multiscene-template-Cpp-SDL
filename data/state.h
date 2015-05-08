@@ -12,7 +12,6 @@ class State {
   std::string next; // these will be used as keys to index a map
   std::string previous;
   // persist needs to be some kind of map, but the data type is arbitrary
-  // ??? persist;
 
 public:
   State();
