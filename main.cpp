@@ -53,7 +53,7 @@ int main (int argc, char* args[])
   Tools::loadGraphics(gfx);
 
   Tools::Sprite testGuy;
-  if( !testGuy.loadFromFile( "resources/graphics/foo.png" ) ) //shim
+  if( !testGuy.setImage( gfx["foo.png"] ) ) //shim
   {
     printf( "Failed to load Foo' texture image!\n" );
   }

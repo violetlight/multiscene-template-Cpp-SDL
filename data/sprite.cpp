@@ -13,44 +13,19 @@ Tools::Sprite::~Sprite()
 	free();
 }
 
-bool Tools::Sprite::loadFromFile( std::string path )
+bool Tools::Sprite::setImage( SDL_Texture* image )
 {
-	//Get rid of preexisting texture
+	//Get rid of preexisting texture to allow switching
 	free();
 
-	//The final texture
-	SDL_Texture* newTexture = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
-		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
-	}
-	else
-	{
-		//Color key image
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
-
-		//Create texture from surface pixels
-        newTexture = SDL_CreateTextureFromSurface( Screen::renderer, loadedSurface );
-		if( newTexture == NULL )
-		{
-			printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
-		}
-		else
-		{
-			//Get image dimensions
-			mWidth = loadedSurface->w;
-			mHeight = loadedSurface->h;
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
+	int w, h;
+	SDL_QueryTexture(image, NULL, NULL, &w, &h);
+	//Get image dimensions
+	mWidth = w;
+	mHeight = h;
 
 	//Return success
-	mTexture = newTexture;
+	mTexture = image;
 	return mTexture != NULL;
 }
 

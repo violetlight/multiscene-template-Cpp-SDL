@@ -20,6 +20,7 @@ SDL_Texture* loadTexture(std::string path)
     }
     else
     {
+        SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0x00, 0xFF, 0xFF));
         //Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface(Screen::renderer, loadedSurface);
         if (newTexture == NULL)

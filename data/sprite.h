@@ -15,7 +15,7 @@ namespace Tools {
           // All the resources in the game are pre-loaded into maps so
           // change all the loadFoo..s to setters
           //Loads image at specified path
-          bool loadFromFile( std::string path );
+          bool setImage( SDL_Texture *path );
           //Creates image from font string
           // bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
 
