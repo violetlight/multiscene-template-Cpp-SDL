@@ -76,6 +76,7 @@ void Tools::Sprite::free()
 	}
 }
 
+
 void Tools::Sprite::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip )
 {
 	//Set rendering space and render to screen
@@ -83,12 +84,30 @@ void Tools::Sprite::render( int x, int y, SDL_Rect* clip, double angle, SDL_Poin
 	SDL_RenderCopy( Screen::renderer, mTexture, NULL, &renderQuad );
 }
 
+
 int Tools::Sprite::getWidth()
 {
 	return mWidth;
 }
 
+
 int Tools::Sprite::getHeight()
 {
 	return mHeight;
+}
+
+
+void Tools::Sprite::setColor( Uint8 red, Uint8 green, Uint8 blue )
+{
+	SDL_SetTextureColorMod( mTexture, red, green, blue );
+}
+
+void Tools::Sprite::setBlendMode( SDL_BlendMode blending )
+{
+	SDL_SetTextureBlendMode( mTexture, blending );
+}
+
+void Tools::Sprite::setAlpha( Uint8 alpha )
+{
+	SDL_SetTextureAlphaMod( mTexture, alpha );
 }
