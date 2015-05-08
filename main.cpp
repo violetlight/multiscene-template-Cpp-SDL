@@ -66,12 +66,6 @@ int main (int argc, char* args[])
   std::map<std::string, TTF_Font*> fonts;
   Tools::loadFonts(fonts);
 
-  Tools::Sprite testGuy;
-  if( !testGuy.setImage( gfx["foo.png"] ) )
-  {
-    printf( "Failed to load Foo' texture image!\n" );
-  }
-
   Tools::Sprite testText;
   SDL_Color textColor = {0x20,0x0F,0xA0};
   if (!testText.setImageFromText("helloooooooooo world", textColor, fonts["Fixedsys500c.ttf"]))
@@ -86,12 +80,45 @@ int main (int argc, char* args[])
   }
 
   testGirl.setBlendMode(SDL_BLENDMODE_BLEND);
+
+  int WALKING_ANIMATION_FRAMES = 4;
+  SDL_Rect walkingClips[WALKING_ANIMATION_FRAMES];
+  Tools::Sprite walkingSpriteSheet;
+  if( !walkingSpriteSheet.setImage( gfx["foo.png"] ) )
+  {
+    printf( "Failed to load Foo' texture image!\n" );
+  }
+  else
+  {
+    //Set sprite clips
+    walkingClips[ 0 ].x =   0;
+    walkingClips[ 0 ].y =   0;
+    walkingClips[ 0 ].w =  64;
+    walkingClips[ 0 ].h = 205;
+
+    walkingClips[ 1 ].x =  64;
+    walkingClips[ 1 ].y =   0;
+    walkingClips[ 1 ].w =  64;
+    walkingClips[ 1 ].h = 205;
+
+    walkingClips[ 2 ].x = 128;
+    walkingClips[ 2 ].y =   0;
+    walkingClips[ 2 ].w =  64;
+    walkingClips[ 2 ].h = 205;
+
+    walkingClips[ 3 ].x = 196;
+    walkingClips[ 3 ].y =   0;
+    walkingClips[ 3 ].w =  64;
+    walkingClips[ 3 ].h = 205;
+  }
   // --------------------------------------------------------------
 
   bool quit = false;
   SDL_Event e;
 
+  // debug, experimental, whatever
   Uint8 alpha = 255;
+  int frame = 0;
 
   while(!quit)
   {
@@ -166,13 +193,25 @@ int main (int argc, char* args[])
 
     // Render splash image
     SDL_RenderCopy(Screen::renderer, gfx["splash2.png"], NULL, NULL );
-    testGuy.render(0, 0);
     testText.render( ( Constants::SCREEN_W - testText.getWidth() ) / 2, ( Constants::SCREEN_H - testText.getHeight() ) / 2 );
     testGirl.setAlpha(alpha);
     testGirl.render(0,0);
 
+    SDL_Rect* currentClip = &walkingClips[frame/4];
+    int x = (Constants::SCREEN_W - currentClip->w) / 2;
+    int y = (Constants::SCREEN_H - currentClip->h) / 2;
+    walkingSpriteSheet.render(x, y, currentClip);
+
+    std::cout << x << y << std::endl;
+
     // Update screen
     SDL_RenderPresent(Screen::renderer);
+
+    ++frame;
+    if (frame/4 >= WALKING_ANIMATION_FRAMES)
+    {
+      frame = 0;
+    }
 
   } // main loop
 

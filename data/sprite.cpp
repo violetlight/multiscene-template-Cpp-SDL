@@ -81,7 +81,14 @@ void Tools::Sprite::render( int x, int y, SDL_Rect* clip, double angle, SDL_Poin
 {
 	//Set rendering space and render to screen
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
-	SDL_RenderCopy( Screen::renderer, mTexture, NULL, &renderQuad );
+
+	if (clip != NULL)
+	{
+		renderQuad.w = clip->w;
+		renderQuad.h = clip->h;
+	}
+
+	SDL_RenderCopy( Screen::renderer, mTexture, clip, &renderQuad );
 }
 
 

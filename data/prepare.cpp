@@ -25,6 +25,11 @@ bool Prepare::init() {
        printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
        success = false;
     }
+    //Set texture filtering to linear
+    if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
+    {
+      printf( "Warning: Linear texture filtering not enabled!" );
+    }
     // Create window
     Screen::window = SDL_CreateWindow(CAPTION,
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -40,7 +45,12 @@ bool Prepare::init() {
       // Get window surface in another function
       //gScreenSurface = SDL_GetWindowSurface( Window );
 
-      Screen::renderer = SDL_CreateRenderer(Screen::window, -1, 0); // wrap this in error catching too
+      Screen::renderer = SDL_CreateRenderer(Screen::window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+      if (Screen::renderer == NULL)
+      {
+        printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+        success = false;
+      }
     }
   }
 
