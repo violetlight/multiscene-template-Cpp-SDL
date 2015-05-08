@@ -6,6 +6,7 @@
 #include <sdl2/SDL_mixer.h>
 #include <string>
 #include <map>
+#include "sprite.h"
 
 
 namespace Tools {

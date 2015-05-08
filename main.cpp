@@ -5,7 +5,7 @@
 #include <string>
 #include "data/prepare.h"
 #include "data/tools.h"
-// #include "data/constants.h" //i think this will break it
+//#include "data/constants.h" //i think this will break it
 #include <iostream>
 
 void close(std::map<std::string, SDL_Texture*> gfx,
@@ -45,11 +45,19 @@ int main (int argc, char* args[])
 
   Prepare::init();
 
+  // all of this needs to go into a loadMedia function or something
   std::map<std::string, Mix_Music*> music;
-  loadMusic(music);
+  Tools::loadMusic(music);
 
   std::map<std::string, SDL_Texture*> gfx;
-  loadGraphics(gfx);
+  Tools::loadGraphics(gfx);
+
+  Tools::Sprite testGuy;
+  if( !testGuy.loadFromFile( "resources/graphics/foo.png" ) ) //shim
+  {
+    printf( "Failed to load Foo' texture image!\n" );
+  }
+  // --------------------------------------------------------------
 
   bool quit = false;
   SDL_Event e;
@@ -90,10 +98,15 @@ int main (int argc, char* args[])
       }
     }
 
-    //Update the surface
-    SDL_SetRenderDrawColor(Screen::renderer, 100, 0, 0, 255);
+    // Clear screen
+    SDL_SetRenderDrawColor(Screen::renderer, 0xFF, 0xFF, 0xFF, 0xFF);
     SDL_RenderClear(Screen::renderer);
-    SDL_RenderCopy(Screen::renderer, gfx["splash1.png"], NULL, NULL );
+
+    // Render splash image
+    SDL_RenderCopy(Screen::renderer, gfx["splash2.png"], NULL, NULL );
+    testGuy.render(0, 0);
+
+    // Update screen
     SDL_RenderPresent(Screen::renderer);
 
   } // main loop
