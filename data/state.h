@@ -1,4 +1,7 @@
-#include <SDL_ttf.h>
+#ifndef STATE_H
+#define STATE_H
+
+#include <sdl2/SDL.h>
 
 class State {
 
@@ -6,16 +9,19 @@ class State {
   double currentTime;
   bool done;
   bool quit;
-  State *next;
-  State *previous;
+  std::string next; // these will be used as keys to index a map
+  std::string previous;
   // persist needs to be some kind of map, but the data type is arbitrary
   // ??? persist;
 
 public:
-  virtual void processEvent(SDL_event &e);
+  State();
+  ~State();
   void startup(double currentTime);
   void cleanup();
-  void update();
-  //std::pair<
-  // render_font needs to return a std::pair
+  virtual void processEvent(SDL_event &e);
+  virtual void update();
+  virtual void draw();
 }
+
+#endif
