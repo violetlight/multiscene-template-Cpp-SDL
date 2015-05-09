@@ -202,8 +202,6 @@ int main (int argc, char* args[])
     int y = (Constants::SCREEN_H - currentClip->h) / 2;
     walkingSpriteSheet.render(x, y, currentClip);
 
-    std::cout << x << y << std::endl;
-
     // Update screen
     SDL_RenderPresent(Screen::renderer);
 
