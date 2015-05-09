@@ -63,7 +63,7 @@ bool mapResourceNode(std::string path, std::map<std::string, std::string>& paths
   return true;
 }
 
-bool Tools::loadGraphics(std::map<std::string, SDL_Texture*>& map) {
+bool Tools::loadGraphics() {
 
   std::map<std::string, std::string> paths;
   mapResourceNode("resources/graphics/", paths);
@@ -76,7 +76,7 @@ bool Tools::loadGraphics(std::map<std::string, SDL_Texture*>& map) {
       std::cout << "Failed to load texture: " << path.second << std::endl;
     } else
     {
-      map[path.first] = img;
+      Tools::gfx[path.first] = img;
     }
   }
 
@@ -84,7 +84,7 @@ bool Tools::loadGraphics(std::map<std::string, SDL_Texture*>& map) {
 }
 
 
-bool Tools::loadMusic(std::map<std::string, Mix_Music*>& map) {
+bool Tools::loadMusic() {
 
   std::map<std::string, std::string> paths;
   mapResourceNode("resources/music/", paths);
@@ -97,14 +97,15 @@ bool Tools::loadMusic(std::map<std::string, Mix_Music*>& map) {
       std::cout << "Failed to load music: " << path.second << std::endl;
     } else
     {
-      map[path.first] = file;
+      Tools::music[path.first] = file;
     }
   }
 
   return true;
 }
 
-bool Tools::loadFonts(std::map<std::string, TTF_Font*>& map) {
+
+bool Tools::loadFonts() {
 
   std::map<std::string, std::string> paths;
   mapResourceNode("resources/fonts/", paths);
@@ -117,9 +118,21 @@ bool Tools::loadFonts(std::map<std::string, TTF_Font*>& map) {
       std::cout << "Failed to load font: " << path.second << std::endl;
     } else
     {
-      map[path.first] = font;
+      Tools::fonts[path.first] = font;
     }
   }
+
+  return true;
+}
+
+std::map<std::string, Mix_Music*> Tools::music;
+std::map<std::string, SDL_Texture*> Tools::gfx;
+std::map<std::string, TTF_Font*> Tools::fonts;
+
+bool Tools::loadMedia() {
+  Tools::loadMusic();
+  Tools::loadGraphics();
+  Tools::loadFonts();
 
   return true;
 }

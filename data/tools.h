@@ -10,9 +10,14 @@
 
 
 namespace Tools {
-  bool loadGraphics(std::map<std::string, SDL_Texture*>& map);
-  bool loadMusic(std::map<std::string, Mix_Music*>& map);
-  bool loadFonts(std::map<std::string, TTF_Font*>& map);
+  extern std::map<std::string, Mix_Music*> music;
+  extern std::map<std::string, SDL_Texture*> gfx;
+  extern std::map<std::string, TTF_Font*> fonts;
+
+  bool loadMedia();
+  bool loadGraphics();
+  bool loadMusic();
+  bool loadFonts();
 }
 
 #endif
