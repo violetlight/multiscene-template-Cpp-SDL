@@ -1,9 +1,11 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
+#include <string>
 
 namespace Constants {
-  const int SCREEN_W = 640;
-  const int SCREEN_H = 480;
+  extern const int SCREEN_W;
+  extern const int SCREEN_H;
+  extern std::string CAPTION;
 }
 
 #endif
