@@ -2,6 +2,7 @@
 #define STATE_H
 
 #include <sdl2/SDL.h>
+#include <string>
 
 class State {
 
@@ -18,9 +19,9 @@ public:
   ~State();
   void startup(double currentTime);
   void cleanup();
-  virtual void processEvent(SDL_event &e);
-  virtual void update();
-  virtual void draw();
-}
+  virtual void processEvent(SDL_Event &e) = 0;
+  virtual void update() = 0;
+  virtual void draw() = 0;
+};
 
 #endif
